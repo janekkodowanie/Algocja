@@ -17,4 +17,12 @@ public class Section {
     public int getId() {
         return Id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
