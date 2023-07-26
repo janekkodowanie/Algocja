@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/sections")
-public class SectionController {
+class SectionController {
 
     private static final Logger logger = LoggerFactory.getLogger(SectionController.class);
     private final SectionService sectionService;
