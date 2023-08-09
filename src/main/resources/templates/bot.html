@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ChatBot</title>
+    <title>ChatBot</title>
 </head>
 <body>
 <label for="inputData">Enter Prompt:</label>
 <input type="text" id="inputData">
 <button onclick="processData()">Submit</button>
-<p id="outputData"></p>
+<div id="outputData"></div>
 
 <script>
-  function processData() {
-    const inputData = document.getElementById("inputData").value;
-    
-    fetch('/bot', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ labelData: inputData })
-    })
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById("outputData").innerText = data;
-          })
-          .catch(error => console.error('Error:', error));
-  }
+    function processData() {
+        const inputData = document.getElementById("inputData").value;
+        
+        fetch('/bot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ inputData: inputData })
+        })
+              .then(response => {
+                  const reader = response.body.getReader();
+                  
+                  function processStream({ done, value }) {
+                      if (done) return;
+                      
+                      const outputElement = document.getElementById("outputData");
+                      const text = String.fromCharCode(...value);
+                      outputElement.innerHTML += "<br>" + text + "<br>";
+                      
+                      return reader.read().then(processStream);
+                  }
+                  
+                  
+                  return reader.read().then(processStream);
+              })
+              .catch(error => console.error('Error:', error));
+    }
 </script>
 </body>
 </html>
