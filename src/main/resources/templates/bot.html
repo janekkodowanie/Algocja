@@ -13,6 +13,8 @@
     function processData() {
         const inputData = document.getElementById("inputData").value;
         
+        console.log(inputData);
+        
         fetch('/bot', {
             method: 'POST',
             headers: {
@@ -28,7 +30,7 @@
                       
                       const outputElement = document.getElementById("outputData");
                       const text = String.fromCharCode(...value);
-                      outputElement.innerHTML += "<br>" + text + "<br>";
+                      outputElement.innerHTML += text;
                       
                       return reader.read().then(processStream);
                   }
