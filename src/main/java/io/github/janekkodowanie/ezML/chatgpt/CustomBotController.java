@@ -10,7 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Flux;
 
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -34,14 +38,32 @@ class CustomBotController {
         this.session = new Session();
     }
 
-
     @PostMapping
-    ResponseEntity<String> addQuery(@RequestBody String inputData) {
-        ChatGPTResponse response = template.postForObject(apiURL, new ChatGPTRequest(chatVersion, inputData), ChatGPTResponse.class);
-        session.addQuery(inputData, response.getChoices().get(0).getMessage().getContent());
+    public Flux<String> addQuery(@RequestBody String inputData) {
+        logger.info(inputData);
 
-        return ResponseEntity.ok(response.getChoices().get(0).getMessage().getContent());
+        List<String> responses = Arrays.asList(
+                "Response 1 to: " + inputData,
+                "Response 2 to: " + inputData,
+                "Response 3 to: " + inputData
+        );
+
+        return Flux.fromIterable(responses)
+                .delayElements(Duration.ofSeconds(1));
     }
+
+    public static class InputData {
+        private final String input;
+
+        public InputData(String input) {
+            this.input = input;
+        }
+
+        public String getInput() {
+            return input;
+        }
+    }
+
 
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
     ModelAndView hello() {

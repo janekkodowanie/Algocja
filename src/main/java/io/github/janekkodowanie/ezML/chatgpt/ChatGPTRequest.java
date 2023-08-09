@@ -12,10 +12,12 @@ class ChatGPTRequest {
 
     private List<Message> messages;
 
+    private boolean stream;
 
     public ChatGPTRequest(String model, String prompt) {
         this.model = model;
         this.messages = new ArrayList<>();
         this.messages.add(new Message("user", prompt));
+        this.stream = true;
     }
 }
