@@ -2,6 +2,7 @@ package io.github.janekkodowanie.ezML.chatgpt;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
@@ -50,12 +51,15 @@ class CustomBotController {
                 .headers(headers -> headers.addAll(httpHeaders))
                 .bodyValue(request)
                 .retrieve()
-                .bodyToFlux(Chunk.class)
+                .bodyToFlux(String.class)
                 .map(chunk -> {
-                    if (chunk.getChoices().get(0).getDelta().getContent() == null) {
-                        return ".";
+                    try {
+                        logger.info(chunk);
+                        JsonNode jsonNode = new ObjectMapper().readTree(chunk);
+                        return jsonNode.get("choices").get(0).get("delta").get("content").asText();
+                    } catch (Exception e) {
+                        return "";
                     }
-                    return chunk.getChoices().get(0).getDelta().getContent();
                 });
     }
 
