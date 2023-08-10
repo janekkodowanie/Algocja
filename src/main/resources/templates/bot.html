@@ -28,8 +28,11 @@
                   function processStream({ done, value }) {
                       if (done) return;
                       
+                      /* todo comment */
+                      const uint8Array = new Uint8Array(value);
+                      const text = new TextDecoder("utf-8").decode(uint8Array);
+                      
                       const outputElement = document.getElementById("outputData");
-                      const text = String.fromCharCode(...value);
                       outputElement.innerHTML += text;
                       
                       return reader.read().then(processStream);

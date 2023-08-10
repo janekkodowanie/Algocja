@@ -9,9 +9,7 @@ import java.util.List;
 class ChatGPTRequest {
 
     private String model;
-
     private List<Message> messages;
-
     private boolean stream;
 
     public ChatGPTRequest(String model, String prompt) {
