@@ -1,7 +1,6 @@
 package io.github.janekkodowanie.ezML.algorithm;
 
 
-import io.github.janekkodowanie.ezML.section.Section;
 import jakarta.persistence.*;
 
 @Entity
