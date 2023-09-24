@@ -1,6 +1,9 @@
 package io.github.janekkodowanie.ezML.algorithm;
 
 
+import io.github.janekkodowanie.ezML.section.Section;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,7 +25,6 @@ class AlgorithmController {
         this.repository = repository;
     }
 
-
     @GetMapping("/all")
     public ResponseEntity<List<Algorithm>> readAllAlgorithms() {
         return ResponseEntity.ok(repository.findAll());
@@ -32,7 +34,5 @@ class AlgorithmController {
     public ResponseEntity<Algorithm> showAlgorithm(@RequestParam String name) {
         return ResponseEntity.ok(repository.findByName(name).orElseThrow(() -> new IllegalArgumentException(name)));
     }
-
-
 
 }

@@ -1,6 +1,7 @@
 package io.github.janekkodowanie.ezML.algorithm;
 
 
+import io.github.janekkodowanie.ezML.section.Section;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,10 +14,18 @@ public class Algorithm {
     private String name;
     private String purpose;
 
-    public Algorithm(int id, String name, String purpose) {
+    @ManyToOne
+    @JoinColumn(name = "SECTION_ID")
+    private Section section;
+
+    public Algorithm(int id, String name, String purpose, Section section) {
         this.Id = id;
         this.name = name;
         this.purpose = purpose;
+        this.section = section;
+    }
+    public Algorithm(int id, String name, String purpose) {
+        this(id, name, purpose, null);
     }
 
     public Algorithm() {}

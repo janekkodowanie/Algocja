@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>ChatBot</title>
+</head>
+<body>
+<label for="inputData">
+	<textarea id="inputData" rows="10" cols="50" placeholder="Type your prompt."></textarea>
+</label>
+<button onclick="processData()">Submit</button>
+<div id="outputData"></div>
+
+<script>
+    function processData() {
+        const inputData = document.getElementById("inputData").value;
+
+        console.log(inputData);
+
+        fetch('/bot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ inputData: inputData })
+        })
+            .then(response => {
+                /* Creating reader object */
+                const reader = response.body.getReader();
+
+                /* Recursive processing chunks of data */
+                function processStream({ done, value }) {
+
+                    if (done) {
+                        console.log('Stream complete');
+                        return;
+                    }
+
+                    /* Decoding the array of bytes into a string. */
+                    const text = new TextDecoder("utf-8").decode(value);
+
+                    /* Printing out new chunk od text. */
+                    const outputElement = document.getElementById("outputData");
+                    outputElement.innerHTML += text;
+
+                    /* Recursive call. */
+                    return reader.read().then(processStream);
+                }
+
+                return reader.read().then(processStream);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>

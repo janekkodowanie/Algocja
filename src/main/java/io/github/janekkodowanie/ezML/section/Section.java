@@ -1,6 +1,9 @@
 package io.github.janekkodowanie.ezML.section;
 
+import io.github.janekkodowanie.ezML.algorithm.Algorithm;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "sections")
@@ -10,19 +13,37 @@ public class Section {
     private int Id;
     private String name;
 
-    public void setId(int id) {
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "section"
+    )
+
+    private Set<Algorithm> algorithms;
+
+    public Section() {}
+
+    void setId(int id) {
         this.Id = id;
     }
 
-    public int getId() {
+    int getId() {
         return Id;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
+    }
+
+    Set<Algorithm> getAlgorithms() {
+        return algorithms;
+    }
+
+    void setAlgorithms(Set<Algorithm> algorithms) {
+        this.algorithms = algorithms;
     }
 }
