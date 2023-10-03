@@ -9,4 +9,6 @@ public interface AlgorithmRepository {
     List<Algorithm> findAll();
 
     Optional<Algorithm> findByName(String name);
+
+    Algorithm save(Algorithm entity);
 }

@@ -6,4 +6,6 @@ public interface SectionRepository {
 
     List<Section> findAll();
 
+    Section save(Section entity);
+
 }

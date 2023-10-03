@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+public
 class ChatGPTRequest {
 
     private String model;

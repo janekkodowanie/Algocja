@@ -1,55 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>ChatBot</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Algorithms</title>
+	<link rel="stylesheet" href="https://igoradamenko.com/awsm.css/v2/css/awsm.css">
+	<style>
+        .Bd {
+            border: 1px solid black;
+        }
+
+        .C\(red\) {
+            color: red;
+        }
+
+        .Bdc\(red\) {
+            border-color: red !important;
+        }
+
+        .P\(0\) {
+            padding: 0;
+        }
+
+        .M\(0\) {
+            margin: 0;
+        }
+
+        .P\(10px\) {
+            padding: 10px;
+        }
+	</style>
+
 </head>
 <body>
-<label for="inputData">
-	<textarea id="inputData" rows="10" cols="50" placeholder="Type your prompt."></textarea>
-</label>
-<button onclick="processData()">Submit</button>
-<div id="outputData"></div>
+<main>
+	<!--/*@thymesVar id="algorithms" type="java.util.List<io.github.janekkodowanie.ezML.algorithm.Algorithm>"*/-->
+	
+	<dl th:each="algorithm : ${algorithms}" class="Bd P(10px)">
+		<dt>
+			<a th:href="'/algorithms/' + ${algorithm.name}"> <!-- Create a hyperlink with the algorithm's name -->
+				<span th:text="${algorithm.name}">Algorithm Name</span> <!-- Display the algorithm name -->
+			</a>
+		</dt>
+	</dl>
 
-<script>
-    function processData() {
-        const inputData = document.getElementById("inputData").value;
-
-        console.log(inputData);
-
-        fetch('/bot', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ inputData: inputData })
-        })
-            .then(response => {
-                /* Creating reader object */
-                const reader = response.body.getReader();
-
-                /* Recursive processing chunks of data */
-                function processStream({ done, value }) {
-
-                    if (done) {
-                        console.log('Stream complete');
-                        return;
-                    }
-
-                    /* Decoding the array of bytes into a string. */
-                    const text = new TextDecoder("utf-8").decode(value);
-
-                    /* Printing out new chunk od text. */
-                    const outputElement = document.getElementById("outputData");
-                    outputElement.innerHTML += text;
-
-                    /* Recursive call. */
-                    return reader.read().then(processStream);
-                }
-
-                return reader.read().then(processStream);
-            })
-            .catch(error => console.error('Error:', error));
-    }
-</script>
+</main>
 </body>
 </html>

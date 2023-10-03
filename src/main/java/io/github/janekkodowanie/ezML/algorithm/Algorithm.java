@@ -18,14 +18,13 @@ public class Algorithm {
     @JoinColumn(name = "SECTION_ID")
     private Section section;
 
-    public Algorithm(int id, String name, String purpose, Section section) {
-        this.Id = id;
+    public Algorithm(String name, String purpose, Section section) {
         this.name = name;
         this.purpose = purpose;
         this.section = section;
     }
-    public Algorithm(int id, String name, String purpose) {
-        this(id, name, purpose, null);
+    public Algorithm(String name, String purpose) {
+        this(name, purpose, null);
     }
 
     public Algorithm() {}
