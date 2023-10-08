@@ -30,7 +30,7 @@ public class Algorithm {
     public Algorithm() {}
 
     public int getId() {
-        return Id;
+        return this.Id;
     }
 
     public String getName() {

@@ -10,4 +10,5 @@ public interface SQLSectionRepository extends SectionRepository, JpaRepository<S
 
     @Override
     List<Section> findAll();
+
 }

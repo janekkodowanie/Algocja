@@ -38,11 +38,16 @@
 	
 	<dl th:each="algorithm : ${algorithms}" class="Bd P(10px)">
 		<dt>
-			<a th:href="'/algorithms/' + ${algorithm.name}"> <!-- Create a hyperlink with the algorithm's name -->
+			<a th:href="'/algorithms/desc?name=' + ${algorithm.name}"> <!-- Create a hyperlink with the algorithm's name -->
 				<span th:text="${algorithm.name}">Algorithm Name</span> <!-- Display the algorithm name -->
 			</a>
 		</dt>
 	</dl>
+	
+	<div th:if="${algorithm != null}">
+		<h2>Search Result</h2>
+		<p th:text="${algorithm.getName()}"></p>
+	</div>
 
 </main>
 </body>
