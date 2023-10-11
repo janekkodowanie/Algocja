@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML.section;
+package io.github.janekkodowanie.algocja.section;
 
 import java.util.List;
 

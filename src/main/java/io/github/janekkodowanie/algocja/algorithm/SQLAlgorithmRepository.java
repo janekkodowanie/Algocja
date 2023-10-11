@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML.algorithm;
+package io.github.janekkodowanie.algocja.algorithm;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

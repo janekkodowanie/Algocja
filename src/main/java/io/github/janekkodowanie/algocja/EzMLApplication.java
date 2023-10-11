@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML;
+package io.github.janekkodowanie.algocja;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

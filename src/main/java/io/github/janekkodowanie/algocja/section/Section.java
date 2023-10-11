@@ -1,6 +1,6 @@
-package io.github.janekkodowanie.ezML.section;
+package io.github.janekkodowanie.algocja.section;
 
-import io.github.janekkodowanie.ezML.algorithm.Algorithm;
+import io.github.janekkodowanie.algocja.algorithm.Algorithm;
 import jakarta.persistence.*;
 
 import java.util.Set;

@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML;
+package io.github.janekkodowanie.algocja;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

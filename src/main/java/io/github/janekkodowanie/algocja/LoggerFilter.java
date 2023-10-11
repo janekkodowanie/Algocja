@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML;
+package io.github.janekkodowanie.algocja;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

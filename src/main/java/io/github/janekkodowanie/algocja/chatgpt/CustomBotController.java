@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML.chatgpt;
+package io.github.janekkodowanie.algocja.chatgpt;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,6 +45,8 @@ public class CustomBotController {
         httpHeaders.setBearerAuth(System.getenv("OPENAI_API_KEY"));
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(List.of(MediaType.TEXT_EVENT_STREAM));
+
+        logger.info(inputData);
 
         /* Creating ChatGPTRequest object to be posted. */
         ChatGPTRequest request = new ChatGPTRequest(chatVersion, inputData);

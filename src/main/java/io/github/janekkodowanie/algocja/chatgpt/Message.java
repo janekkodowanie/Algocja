@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML.chatgpt;
+package io.github.janekkodowanie.algocja.chatgpt;
 
 
 import lombok.AllArgsConstructor;

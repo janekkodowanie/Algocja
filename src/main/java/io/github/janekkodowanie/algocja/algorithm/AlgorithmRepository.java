@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML.algorithm;
+package io.github.janekkodowanie.algocja.algorithm;
 
 
 import java.util.List;

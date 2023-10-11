@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML.algorithm;
+package io.github.janekkodowanie.algocja.algorithm;
 
 
 import org.slf4j.Logger;
@@ -35,19 +35,27 @@ class AlgorithmController {
     }
 
     @GetMapping(path = "/desc")
-    public ModelAndView showAlgorithm(@RequestParam String name, Model model) {
+    public Flux<String> showAlgorithm(@RequestParam String name) {
 
         logger.info("Searching for algorithm with name " + name + ".");
         Optional<Algorithm> algorithm = repository.findByName(name);
 
-        if (algorithm.isPresent()) {
+        if (algorithm.isPresent() && algorithm.get().getDescription() != null) {
             logger.info("Algorithm with name " + name + " found.");
-            model.addAttribute("algorithm", algorithm.get());
+            return Flux.just(algorithm.get().getDescription());
 
-        } else {
-            logger.info("Algorithm with name " + name + " not found.");
+        } else if (algorithm.isPresent() && algorithm.get().getDescription() == null) {
+            logger.info("Algorithm with name " + name + " found, but description is null.");
         }
-        return new ModelAndView("algorithms");
+
+        logger.info("Algorithm with name " + name + " not found.");
+        return Flux.empty();
+    }
+
+    @GetMapping(path = "/add")
+    String addAlgorithm(Model model) {
+        model.addAttribute("algorithm", new Algorithm());
+        return "addAlgorithm";
     }
 
 
@@ -78,7 +86,5 @@ class AlgorithmController {
         logger.info("Algorithm with name " + name + " already exists.");
         return ResponseEntity.badRequest().build();
     }
-
-
 
 }

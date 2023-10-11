@@ -1,4 +1,4 @@
-package io.github.janekkodowanie.ezML.section;
+package io.github.janekkodowanie.algocja.section;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
