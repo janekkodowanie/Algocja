@@ -60,10 +60,11 @@ class AlgorithmController {
 
 
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
-    ModelAndView getAlgorithmPage(Model model) {
+    ModelAndView getAlgorithmPage() {
+        ModelAndView modelAndView = new ModelAndView("algorithms");
         logger.info("Getting algorithms page.");
-        model.addAttribute("algorithms", repository.findAll());
-        return new ModelAndView("algorithms");
+        modelAndView.addObject("algorithms", repository.findAll());
+        return modelAndView;
     }
 
     /* TODO

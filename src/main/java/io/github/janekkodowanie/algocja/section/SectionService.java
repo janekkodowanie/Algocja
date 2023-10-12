@@ -20,4 +20,9 @@ class SectionService {
                 .collect(Collectors.toList());
     }
 
+
+    void add(SectionWriteModel sectionWriteModel) {
+        sectionRepository.save(sectionWriteModel.toSection());
+    }
+
 }

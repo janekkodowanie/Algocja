@@ -23,6 +23,10 @@ public class Section {
 
     public Section() {}
 
+    public Section(String name) {
+        this.name = name;
+    }
+
     void setId(int id) {
         this.Id = id;
     }
