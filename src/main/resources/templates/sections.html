@@ -30,19 +30,61 @@
             padding: 10px;
         }
 	</style>
+	
+	<script>
+        function toggleForm() {
+            let form = document.getElementById("dataForm");
+            form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
+            
+            let button = document.getElementById("toggleButton");
+            if (button.innerHTML === '+') {
+                button.innerHTML = '-';
+            } else {
+                button.innerHTML = '+';
+            }
+        }
+	</script>
+	
 </head>
 <body>
 <main>
 	<dl th:each="section : ${sections}" class="Bd P(10px)">
-		<dt th:text="${section.name}"></dt>
-		<!--<dd>
-			<ul>
-				<li th:each="algorithm : ${algorithms}">
-					<span th:text="${algorithm.}"></span><br>
-				</li>
-			</ul>
-		</dd>-->
+		<dt>
+			<a th:href="'/sections/section?name=' + ${section.name}"> <!-- Create a hyperlink with the algorithm's name -->
+				<span th:text="${section.name}">Algorithm Name</span> <!-- Display the algorithm name -->
+			</a>
+		</dt>
 	</dl>
+	
+	
+	<div th:if="${sectionReadModel != null}">
+		<h2>Search Result</h2>
+		<p th:text="${sectionReadModel.getName()}"></p>
+		<dl th:each="algorithm : ${sectionReadModel.getAlgorithms()}" class="Bd P(10px)">
+			<dt>
+				<a th:href="'/algorithms/desc?name=' + ${algorithm.name}"> <!-- Create a hyperlink with the algorithm's name -->
+					<span th:text="${algorithm.name}">Algorithm Name</span> <!-- Display the algorithm name -->
+				</a>
+			</dt>
+		</dl>
+		
+		<button id="toggleButton" onclick="toggleForm()">+</button>
+		<form action="/sections/section/add" method="post" th:object="${algorithmWriteModel}" id="dataForm" style="display: none;">
+			<label for="name">Algorithm Name:</label>
+			<input type="text" th:field="*{name}" id="name" name="name"><br><br>
+			
+			<label for="description">Algorithm Description:</label>
+			<textarea th:field="*{description}" id="description" name="description" rows="4" cols="50"></textarea><br><br>
+			
+			<input type="hidden" name="sectionName" th:value="${sectionReadModel.name}" />
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+	
+
+
+
+
 </main>
 
 </body>

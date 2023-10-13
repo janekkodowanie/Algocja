@@ -15,6 +15,10 @@ public class Algorithm {
     private String purpose;
     private String description;
 
+    /*
+    private String complexity;
+    private String code;
+    */
 
     @ManyToOne
     @JoinColumn(name = "SECTION_ID")

@@ -9,6 +9,7 @@ public class SectionReadModel {
     private String name;
     private Set<Algorithm> algorithms;
 
+    public SectionReadModel() {}
 
     public SectionReadModel(Section section) {
         this.name = section.getName();
@@ -30,4 +31,9 @@ public class SectionReadModel {
     public void setAlgorithms(Set<Algorithm> algorithms) {
         this.algorithms = algorithms;
     }
+
+    public Section toSection() {
+        return new Section(this.getName(), this.algorithms);
+    }
+
 }

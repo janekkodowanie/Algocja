@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.Async;
 
 @Async
 @SpringBootApplication
-public class EzMLApplication {
+public class AlgocjaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EzMLApplication.class, args);
+		SpringApplication.run(AlgocjaApplication.class, args);
 	}
 }
