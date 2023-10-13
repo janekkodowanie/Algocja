@@ -27,6 +27,11 @@ public class Section {
         this.name = name;
     }
 
+    public Section(String name, Set<Algorithm> algorithms) {
+        this.name = name;
+        this.algorithms = algorithms;
+    }
+
     void setId(int id) {
         this.Id = id;
     }

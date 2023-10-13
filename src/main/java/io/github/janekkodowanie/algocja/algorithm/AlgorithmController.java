@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import reactor.core.publisher.Flux;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -27,11 +26,6 @@ class AlgorithmController {
     @Autowired
     AlgorithmController(AlgorithmRepository repository) {
         this.repository = repository;
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<Algorithm>> readAllAlgorithms() {
-        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping(path = "/desc")
@@ -77,6 +71,7 @@ class AlgorithmController {
     *   Zaleznie od tego dodawac lub nie
     * */
 
+    /*
     @PostMapping("/add/{name}")
     public ResponseEntity<Algorithm> addAlgorithm(@PathVariable String name) {
         if (repository.findByName(name).isEmpty()) {
@@ -87,5 +82,5 @@ class AlgorithmController {
         logger.info("Algorithm with name " + name + " already exists.");
         return ResponseEntity.badRequest().build();
     }
-
+    */
 }
